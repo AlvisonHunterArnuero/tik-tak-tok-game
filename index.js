@@ -1,3 +1,9 @@
+/**
+ * Name: Just Another Tic Tac Toe Game
+ * Created by Alvison Hunter for mentoring and educational purposes only.
+ * Date: May 22nd, 2024
+ */
+
 // App DOM elements Init instantiation
 
 // Get the grid element which will contain the tic-tac-toe board

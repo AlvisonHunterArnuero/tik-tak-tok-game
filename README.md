@@ -1,4 +1,8 @@
-# Tic Tac Toe Game
+# Just Another Tic Tac Toe Game
+Created by **Alvison Hunter** for mentoring and educational purposes only.<br>
+**Senior Frontend Developer** at CodeCrafters Labs - May 22nd, 2024
+
+
 
 This repository contains a simple implementation of the classic Tic Tac Toe game using HTML, CSS, and JavaScript. The game allows two players to play against each other on a 3x3 grid. The project demonstrates basic web development skills, including DOM manipulation, event handling, and dynamic content updates.
 
