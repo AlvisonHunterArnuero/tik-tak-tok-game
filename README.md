@@ -1,4 +1,7 @@
 # Just Another Tic Tac Toe Game
+
+![image](https://github.com/user-attachments/assets/81be9708-d048-4fc8-add3-6b1812e13c37)
+
 Created by **Alvison Hunter** for mentoring and educational purposes only.<br>
 **Senior Frontend Developer** at CodeCrafters Labs - October, 18th, 2024
 
