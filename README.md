@@ -1,9 +1,8 @@
 # Just Another Tic Tac Toe Game
 Created by **Alvison Hunter** for mentoring and educational purposes only.<br>
-**Senior Frontend Developer** at CodeCrafters Labs - May 22nd, 2024
+**Senior Frontend Developer** at CodeCrafters Labs - October, 18th, 2024
 
-
-
+## About this game
 This repository contains a simple implementation of the classic Tic Tac Toe game using HTML, CSS, and JavaScript. The game allows two players to play against each other on a 3x3 grid. The project demonstrates basic web development skills, including DOM manipulation, event handling, and dynamic content updates.
 
 ## Features
@@ -14,15 +13,16 @@ This repository contains a simple implementation of the classic Tic Tac Toe game
 
 ## Tools and Technologies Used
 
-- **HTML:** Provides the structure of the game board and other elements.
-- **CSS:** Styles the game board, cells, and other components to create an attractive and responsive design.
+- **HTML5:** Provides the structure of the game board and other elements.
+- **CSS3:** Styles the game board, cells, and other components to create an attractive and responsive design.
 - **JavaScript:** Implements the game logic, including player turns, winner detection, and dynamic UI updates.
 
 ## Project Structure
 
 - **index.html:** The main HTML file containing the structure of the game.
 - **styles.css:** The CSS file that styles the game board and other elements.
-- **script.js:** The JavaScript file that contains the game logic and DOM manipulation.
+- **index.js:** The JavaScript file that contains the game logic and DOM manipulation.
+- **assets:** The folder that contains the game assets such as images, media files and others.
 
 ## Getting Started
 
@@ -31,7 +31,7 @@ To get a local copy of the project up and running, follow these simple steps:
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/your-username/tic-tac-toe-game.git
+    git clone git@github.com:AlvisonHunterArnuero/tik-tak-tok-game.git
     ```
 
 2. **Open the project folder:**
@@ -42,7 +42,7 @@ To get a local copy of the project up and running, follow these simple steps:
 
 3. **Open `index.html` in your web browser:**
 
-    You can open the `index.html` file directly in your web browser to start playing the game.
+    You can open the `index.html` file directly in your web browser to start playing the game. Additionally, you can also add your local live server to run this file.
 
 ## Usage
 

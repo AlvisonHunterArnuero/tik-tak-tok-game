@@ -80,9 +80,9 @@ const patternColor =
 
     // Check for a winner or draw after the move
     const result = checkWinner();
-
     if (result) {
       isGameOver = true; // Set the game over flag
+      resetBtn.disabled = false; //
 
       // Display the result message
       winnerDiv.textContent =
@@ -125,53 +125,54 @@ const patternColor =
     children[third].style.border = `${STARTING_CELL_BORDER}`;
   }
 
-// Board creation & player colors setup on click
-function createBoard() {
-  // Iterate over the game board array to create each cell
-  gameBoard.forEach((_, index) => {
-    const cell = document.createElement('div');
-    cell.classList.add('cell'); // Add the 'cell' class for styling
-    // Add a click event listener to handle cell clicks
-    cell.addEventListener('click', (event) => {
-      // If Not Game Over, add player-specific background color
-      if (!isGameOver) {
-        cell.classList.add(
-          `player-${currentPlayer.toLowerCase()}-bg`
-        );
-      }
-      handleClick(event, index); // Handle the click event
+  // Board creation & player colors setup on click
+  function createBoard() {
+    // Iterate over the game board array to create each cell
+    gameBoard.forEach((_, index) => {
+      const cell = document.createElement('div');
+      cell.classList.add('cell'); // Add the 'cell' class for styling
+      // Add a click event listener to handle cell clicks
+      cell.addEventListener('click', (event) => {
+        // If Not Game Over, add player-specific background color
+        if (!isGameOver) {
+          cell.classList.add(
+            `player-${currentPlayer.toLowerCase()}-bg`
+          );
+        }
+        handleClick(event, index); // Handle the click event
+      });
+      grid.appendChild(cell); // Append the cell to the grid
     });
-    grid.appendChild(cell); // Append the cell to the grid
+  }
+
+  // Set current date year on the footer part dynamically
+  // Display the current year in the footer
+  footerDate.textContent = new Date().getFullYear();
+
+  // Draw the main board on the screen
+  // Create and display the game board
+  createBoard();
+
+  /* -------- App DOM elements Event Listeners -------- */
+  resetBtn.addEventListener('click', (event) => {
+    if (!isGameOver) return; // ignore not finished game
+
+    // Reset winning pattern Highlights
+    strWinningStatus !== 'Draw' && clearWinningPattern();
+
+    // Clear cells and add init class "cell"
+    const cells = document.querySelectorAll('.cell');
+    cells.forEach((cell) => {
+      cell.textContent = '';
+      cell.className = 'cell';
+    });
+
+    // Hide the winner message Label
+    winnerDiv.classList.add('hidden');
+
+    /* -------- Reset global variables to init status -------- */
+    currentPlayer = 'X';
+    gameBoard = new Array(9).fill('');
+    isGameOver = false;
+    arrWinPattern = [];
   });
-}
-
-// Set current date year on the footer part dynamically
-// Display the current year in the footer
-footerDate.textContent = new Date().getFullYear();
-
-// Draw the main board on the screen
-// Create and display the game board
-createBoard();
-
-/* -------- App DOM elements Event Listeners -------- */
-resetBtn.addEventListener('click', (event) => {
-  // Reset winning pattern Highlights
-
-  strWinningStatus !== 'Draw' && clearWinningPattern();
-
-  // Clear cells and add init class "cell"
-  const cells = document.querySelectorAll('.cell');
-  cells.forEach((cell) => {
-    cell.textContent = '';
-    cell.className = 'cell';
-  });
-
-  // Hide the winner message Label
-  winnerDiv.classList.add('hidden');
-
-  /* -------- Reset global variables to init status -------- */
-  currentPlayer = 'X';
-  gameBoard = new Array(9).fill('');
-  isGameOver = false;
-  arrWinPattern = [];
-});

@@ -18,7 +18,7 @@ html, body, div, span, h1, p, a {
 body {
     line-height: 1;
     background-color: #031111;
-    background-image: url('tictactocbg.png');
+    background-image: url('./assets/tictactocbg.png');
     margin: 0 auto;
     color: #38b4b4;
 }
@@ -86,7 +86,7 @@ body {
 
 .player-x-bg,
 .player-o-bg {
-    background-image: url(ply01.png);
+    background-image: url(./assets/ply01.png);
     background-size: cover;
     background-position: center;
     background-blend-mode: overlay;
@@ -116,7 +116,12 @@ body {
     color: #38b4b4;
 }
 
-
+input[type="button"]:disabled {
+    background-color: grey;
+    color: white;
+    cursor: not-allowed;
+    border: 1px solid #ccc;
+}
 
 /* Winning Label Css Styling */
 .hidden {
