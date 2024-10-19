@@ -1,7 +1,7 @@
 /**
- * Name: Just Another Tic Tac Toe Game
+ * Name: Just Another Silly Pants Tic Tac Toe Game
  * Created by Alvison Hunter for mentoring and educational purposes only.
- * Date: May 22nd, 2024
+ * Date: October 18th, 2024
  */
 
 // App DOM elements Init instantiation
@@ -28,101 +28,104 @@ let isGameOver = false;
 let arrWinPattern = [];
 
 // Define Highlight colors for winning pattern
-const patternColor = currentPlayer === 'X' ? '#fffb23' : '#FF2323';
+const patternColor =
+  currentPlayer === 'X' ? '2px solid #fffb23' : '2px solid #FF2323';
 
-let strWinningStatus = '';
+  const STARTING_CELL_BORDER = '2px solid #38b4b4';
+  let strWinningStatus = '';
 
-// Game winning patterns declaration
-// Array of arrays, each sub-array represents a winning combination of indices
-const winPatterns = [
-  [0, 1, 2], // Top row
-  [3, 4, 5], // Middle row
-  [6, 7, 8], // Bottom row
-  [0, 3, 6], // Left column
-  [1, 4, 7], // Middle column
-  [2, 5, 8], // Right column
-  [0, 4, 8], // Top-left to bottom-right diagonal
-  [2, 4, 6], // Top-right to bottom-left diagonal
-];
+  // Game winning patterns declaration
+  // Array of arrays, each sub-array represents a winning combination of indices
+  const winPatterns = [
+    [0, 1, 2], // Top row
+    [3, 4, 5], // Middle row
+    [6, 7, 8], // Bottom row
+    [0, 3, 6], // Left column
+    [1, 4, 7], // Middle column
+    [2, 5, 8], // Right column
+    [0, 4, 8], // Top-left to bottom-right diagonal
+    [2, 4, 6], // Top-right to bottom-left diagonal
+  ];
 
-// Check if there is a winner or a draw
-//  based on the above's winPatterns
-function checkWinner() {
-  // Iterate over all winning patterns
-  for (const pattern of winPatterns) {
-    const [a, b, c] = pattern;
-    // Check if the board positions match and are not empty
-    if (
-      gameBoard[a] &&
-      gameBoard[a] === gameBoard[b] &&
-      gameBoard[a] === gameBoard[c]
-    ) {
-      arrWinPattern.push(a, b, c);
-      strWinningStatus = gameBoard[a];
-      return gameBoard[a]; // Return the winning player ('X' or 'O')
+  // Check if there is a winner or a draw
+  //  based on the above's winPatterns
+  function checkWinner() {
+    // Iterate over all winning patterns
+    for (const pattern of winPatterns) {
+      const [a, b, c] = pattern;
+      // Check if the board positions match and are not empty
+      if (
+        gameBoard[a] &&
+        gameBoard[a] === gameBoard[b] &&
+        gameBoard[a] === gameBoard[c]
+      ) {
+        arrWinPattern.push(a, b, c);
+        strWinningStatus = gameBoard[a];
+        return gameBoard[a]; // Return the winning player ('X' or 'O')
+      }
+    }
+    // Return 'Draw' if all positions are filled and no winner
+    strWinningStatus = gameBoard.includes('') ? null : 'Draw';
+    return strWinningStatus;
+  }
+
+  // Function to handle a cell click event to verify winning status
+  function handleClick(event, index) {
+    // Ignore clicks if the game is over or the cell is already filled
+    if (isGameOver || gameBoard[index]) return;
+
+    // Update the game board and display the current player's move
+    gameBoard[index] = currentPlayer;
+    event.target.textContent = currentPlayer;
+
+    // Check for a winner or draw after the move
+    const result = checkWinner();
+
+    if (result) {
+      isGameOver = true; // Set the game over flag
+
+      // Display the result message
+      winnerDiv.textContent =
+        result === 'Draw' ? "It's a Draw!" : `${result} Wins!`;
+
+      // Show the winner message Label
+      winnerDiv.classList.remove('hidden');
+
+      // Highlight the winning pattern on screen
+      const [first, second, third] = arrWinPattern;
+      highlightWinningPattern(first, second, third);
+
+      // Disable all the remaining divs that weren't selected
+      const matches = document.querySelectorAll('div.cell');
+      matches.forEach((elem) => {
+        if (elem.className === 'cell') {
+          elem.className = 'cell disabled-cell';
+        }
+      });
+    } else {
+      // Switch the current player
+      currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
     }
   }
-  // Return 'Draw' if all positions are filled and no winner
-  strWinningStatus = gameBoard.includes('') ? null : 'Draw';
-  return strWinningStatus;
-}
 
-// Function to handle a cell click event to verify winning status
-function handleClick(event, index) {
-  // Ignore clicks if the game is over or the cell is already filled
-  if (isGameOver || gameBoard[index]) return;
-
-  // Update the game board and display the current player's move
-  gameBoard[index] = currentPlayer;
-  event.target.textContent = currentPlayer;
-  // Check for a winner or draw after the move
-  const result = checkWinner();
-  if (result) {
-    console.log(gameBoard);
-    isGameOver = true; // Set the game over flag
-    // Display the result message
-    winnerDiv.textContent =
-      result === 'Draw' ? "It's a Draw!" : `${result} Wins!`;
-    // Show the winner message Label
-    winnerDiv.classList.remove('hidden');
-
-    // Highlight the winning pattern on screen
-    console.log('PATTERN: ', arrWinPattern);
-    const [first, second, third] = arrWinPattern;
-    highlightWinningPattern(first, second, third);
-
-    // Disable all the remaining divs that weren't selected
-    const matches = document.querySelectorAll('div.cell');
-    matches.forEach((elem, ndx) => {
-      if (elem.className === 'cell') {
-        elem.className = 'cell disabled-cell';
-      }
-    });
-  } else {
-    // Switch the current player
-    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+  // Highlight winning pattern with a different color
+  function highlightWinningPattern(first, second, third) {
+    children = grid.childNodes;
+    children[first].style.border = `${patternColor}`;
+    children[second].style.border = `${patternColor}`;
+    children[third].style.border = `${patternColor}`;
   }
-}
 
-// Highlight winning pattern with a different color
-function highlightWinningPattern(first, second, third) {
-  children = grid.childNodes;
-  children[first].style.border = `2px solid ${patternColor}`;
-  children[second].style.border = `2px solid ${patternColor}`;
-  children[third].style.border = `2px solid ${patternColor}`;
-}
+  // Highlight winning pattern with a different color
+  function clearWinningPattern() {
+    children = grid.childNodes;
+    const [first, second, third] = arrWinPattern;
+    children[first].style.border = `${STARTING_CELL_BORDER}`;
+    children[second].style.border = `${STARTING_CELL_BORDER}`;
+    children[third].style.border = `${STARTING_CELL_BORDER}`;
+  }
 
-// Highlight winning pattern with a different color
-function clearWinningPattern() {
-  children = grid.childNodes;
-  const [first, second, third] = arrWinPattern;
-  children[first].style.border = `2px solid #38b4b4`;
-  children[second].style.border = '2px solid #38b4b4';
-  children[third].style.border = '2px solid #38b4b4';
-}
-
-// Board creation and player colors setup on click event
-// Function to create the game board
+// Board creation & player colors setup on click
 function createBoard() {
   // Iterate over the game board array to create each cell
   gameBoard.forEach((_, index) => {
